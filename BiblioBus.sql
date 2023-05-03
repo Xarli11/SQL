@@ -3,39 +3,39 @@
 BEGIN;
 
 
-CREATE TABLE IF NOT EXISTS public."Temas"
-(
-    id_tema serial,
-    nombre character varying NOT NULL,
-    PRIMARY KEY (id_tema)
-);
-
 CREATE TABLE IF NOT EXISTS public."Libros"
 (
-    "ISBN" character(20),
-    titulo character varying NOT NULL,
-    autor character varying NOT NULL,
+    "ISBN" character(20) COLLATE pg_catalog."default" NOT NULL,
+    titulo character varying COLLATE pg_catalog."default" NOT NULL,
+    autor character varying COLLATE pg_catalog."default" NOT NULL,
     n_ejemplares integer NOT NULL,
     id_tema integer NOT NULL,
-    PRIMARY KEY ("ISBN")
+    CONSTRAINT "Libros_pkey" PRIMARY KEY ("ISBN")
 );
 
 CREATE TABLE IF NOT EXISTS public."Socios"
 (
-    id_socio serial,
-    nombre character varying NOT NULL,
+    id_socio serial NOT NULL DEFAULT nextval('"Socios_id_socio_seq"'::regclass),
+    nombre character varying COLLATE pg_catalog."default" NOT NULL,
     edad integer NOT NULL,
-    PRIMARY KEY (id_socio)
+    CONSTRAINT "Socios_pkey" PRIMARY KEY (id_socio)
+);
+
+CREATE TABLE IF NOT EXISTS public."Temas"
+(
+    id_tema integer NOT NULL DEFAULT nextval('"Temas_id_tema_seq"'::regclass),
+    nombre character varying COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT "Temas_pkey" PRIMARY KEY (id_tema)
 );
 
 CREATE TABLE IF NOT EXISTS public.reservas
 (
-    id_reserva serial,
+    id_reserva integer NOT NULL DEFAULT nextval('reservas_id_reserva_seq'::regclass),
     f_prestamo date NOT NULL,
     f_devolucion date NOT NULL,
     id_socio integer NOT NULL,
-    "ISBN" character(20) NOT NULL,
-    PRIMARY KEY (id_reserva)
+    "ISBN" character(20) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT reservas_pkey PRIMARY KEY (id_reserva)
 );
 
 ALTER TABLE IF EXISTS public."Libros"
