@@ -46,14 +46,30 @@ SELECT product_id, SUM(quantity * unit_price) AS TotalSales FROM order_details G
 --Mas de una tabla 
 
 --OBTENER EL NUMERO DE ORDEN, EL ID EMPLEADO, NOMBRE Y APELLIDO DE LAS TABLAS DE ORDENES Y EMPLEADOS
+SELECT order_id, employees.employee_id, first_name, last_name FROM employees INNER JOIN orders ON employees.employee_id = orders.employee_id;
+
 --OBTENER EL PRODUCTID, PRODUCTNAME, SUPPLIERID, COMPANYNAME DE LAS TABLAS DE PRODUCTOS Y PROVEEDORES (SUPPLIERS)
+SELECT product_id, product_name, products.supplier_id, company_name FROM products INNER JOIN suppliers ON products.supplier_id = suppliers.supplier_id;
+
+
 --OBTENER LOS DATOS DEL DETALLE DE ORDENES CON EL NOMBRE DEL PRODUCTO DE LAS TABLAS DE DETALLE DE ORDENES Y DE PRODUCTOS
+SELECT order_details.product_id, order_id, product_name, products.unit_price, quantity, discount FROM order_details INNER JOIN products ON order_details.product_id = products.product_id;
+
 --OBTENER DE LAS ORDENES EL ID, SHIPPERID, NOMBRE DE LA COMPAÑÍA DE ENVIO (SHIPPERS)
 --Obtener el número de orden, país de envío (shipCountry) y el nombre del empleado de la tabla ordenes y empleados Queremos que salga el Nombre y Apellido del Empleado en una sola columna.
+SELECT order_id, orders.ship_via, company_name FROM orders INNER JOIN shippers ON orders.ship_via = shippers.shipper_id;
 
 --Combinando la mayoría de conceptos
 
 --CONTAR EL NUMERO DE ORDENES POR EMPLEADO OBTENIENDO EL ID EMPLEADO Y EL NOMBRE COMPLETO DE LAS TABLAS DE ORDENES Y DE EMPLEADOS join y group by / columna calculada
+SELECT employees.employee_id, CONCAT(first_name, ' ', last_name) AS NombreEmpleado, COUNT(order_id) AS OrderCount FROM orders INNER JOIN employees ON orders.employee_id = employees.employee_id GROUP BY employees.employee_id;
+
 --OBTENER LA SUMA DE LA CANTIDAD VENDIDA Y EL PRECIO PROMEDIO POR NOMBRE DE PRODUCTO DE LA TABLA DE ORDERS DETAILS Y PRODUCTS
+SELECT product_name, SUM(quantity) AS CantidadSell, AVG(order_details.unit_price) AS AvgPrice FROM order_details INNER JOIN products ON order_details.product_id = products.product_id GROUP BY product_name;
+
 --OBTENER LAS VENTAS (UNITPRICE * QUANTITY) POR CLIENTE DE LAS TABLAS ORDER DETAILS, ORDERS
+SELECT customers.company_name, SUM(unit_price * quantity) AS TotalSales FROM orders INNER JOIN customers ON orders.customer_id = customers.customer_id INNER JOIN order_details ON orders.order_id = order_details.order_id GROUP BY company_name;
+
+
 --OBTENER LAS VENTAS (UNITPRICE * QUANTITY) POR EMPLEADO MOSTRANDO EL APELLIDO (LASTNAME)DE LAS TABLAS EMPLEADOS, ORDENES, DETALLE DE ORDENES
+SELECT last_name, SUM(unit_price * quantity) AS TotalSales FROM orders INNER JOIN employees ON orders.employee_id = employees.employee_id INNER JOIN order_details ON orders.order_id = order_details.order_id GROUP BY last_name;
