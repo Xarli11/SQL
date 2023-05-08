@@ -6,8 +6,8 @@ BEGIN;
 CREATE TABLE IF NOT EXISTS public."Libros"
 (
     "ISBN" character(20) COLLATE pg_catalog."default" NOT NULL,
-    titulo character varying COLLATE pg_catalog."default" NOT NULL,
-    autor character varying COLLATE pg_catalog."default" NOT NULL,
+    titulo character varyingCOLLATE pg_catalog."default" NOT NULL,
+    autor character varyingCOLLATE pg_catalog."default" NOT NULL,
     n_ejemplares integer NOT NULL,
     id_tema integer NOT NULL,
     CONSTRAINT "Libros_pkey" PRIMARY KEY ("ISBN")
@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS public."Libros"
 CREATE TABLE IF NOT EXISTS public."Socios"
 (
     id_socio serial NOT NULL DEFAULT nextval('"Socios_id_socio_seq"'::regclass),
-    nombre character varying COLLATE pg_catalog."default" NOT NULL,
+    nombre character varyingCOLLATE pg_catalog."default" NOT NULL,
     edad integer NOT NULL,
     CONSTRAINT "Socios_pkey" PRIMARY KEY (id_socio)
 );
@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS public."Socios"
 CREATE TABLE IF NOT EXISTS public."Temas"
 (
     id_tema integer NOT NULL DEFAULT nextval('"Temas_id_tema_seq"'::regclass),
-    nombre character varying COLLATE pg_catalog."default" NOT NULL,
+    nombre character varyingCOLLATE pg_catalog."default" NOT NULL,
     CONSTRAINT "Temas_pkey" PRIMARY KEY (id_tema)
 );
 

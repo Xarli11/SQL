@@ -29,8 +29,8 @@ SET default_table_access_method = heap;
 
 CREATE TABLE public."Libros" (
     "ISBN" character(20) NOT NULL,
-    titulo character varying NOT NULL,
-    autor character varying NOT NULL,
+    titulo character varyingNOT NULL,
+    autor character varyingNOT NULL,
     n_ejemplares integer NOT NULL,
     id_tema integer NOT NULL
 );
@@ -45,7 +45,7 @@ ALTER TABLE public."Libros" OWNER TO postgres;
 
 CREATE TABLE public."Socios" (
     id_socio integer NOT NULL,
-    nombre character varying NOT NULL,
+    nombre character varyingNOT NULL,
     edad integer NOT NULL
 );
 
@@ -84,7 +84,7 @@ ALTER SEQUENCE public."Socios_id_socio_seq" OWNED BY public."Socios".id_socio;
 
 CREATE TABLE public."Temas" (
     id_tema integer NOT NULL,
-    nombre character varying NOT NULL
+    nombre character varyingNOT NULL
 );
 
 
