@@ -41,7 +41,7 @@ SELECT category_id, SUM(units_in_stock) AS UnidadesTotales FROM products WHERE s
 --CONTAR LAS ORDENES POR EMPLEADO DE LOS PAISES (ShipCountry) SA, CANADA, SPAIN cuYO CONTADOR SEA MAYOR A 25
 SELECT employee_id, COUNT(*) AS NumOrders FROM orders WHERE ship_country IN ('USA', 'CANADA', 'SPAIN') GROUP BY employee_id HAVING COUNT(*) > 25;
 ----OBTENER LAS VENTAS (Quantity * UnitPrice) AGRUPADAS POR PRODUCTO (Orders details) Y CUYA SUMA DE VENTAS SEA MAYOR A 50.000
-SELECT product_id, SUM(quantity * unity_price) AS TotalSales FROM order_details GROUP BY product_id HAVING SUM(quantity * unit_price) > 50000;
+SELECT product_id, SUM(quantity * unit_price) AS TotalSales FROM order_details GROUP BY product_id HAVING SUM(quantity * unit_price) > 50000;
 
 --Mas de una tabla 
 
