@@ -1,7 +1,7 @@
 CREATE FUNCTION calcular_cuota_frances(
     prestamo NUMERIC,
     duracion_meses INTEGER,
-    tasa_interes NUMERIC
+    tasa_interes INTEGER
 ) RETURNS NUMERIC AS $$
 DECLARE
     cuota NUMERIC;
@@ -14,4 +14,4 @@ BEGIN
     RETURN cuota;
 END;
 $$ LANGUAGE plpgsql;
-SELECT calcular_cuota_frances(1000,1,1); --Ejemplo práctico
+SELECT calcular_cuota_frances(1000,1,0.01); --Ejemplo práctico
